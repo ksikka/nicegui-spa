@@ -3,19 +3,22 @@ from typing import Any
 
 from nicegui import ui
 
+
 class TabOne:
-    container: Any = None
-    card: Any = None
-    i: int = 0
-    is_running = False
-    visibility = { "work_card": False}
+    def __init__(self, link_url) -> None:
+        self.container: Any = None
+        self.card: Any = None
+        self.i: int = 0
+        self.is_running = False
+        self.visibility = { "work_card": False}
+        self.link_url = link_url
 
-
-    def main(self):
+    def build(self):
         self.container = ui.element('div')
         with self.container:
             ui.label('Content One').classes('text-2xl')
             ui.button('do work', on_click=self.on_work_button_click)
+            ui.link(self.link_url, self.link_url).classes("soft-link")
             c = ui.card()
             c.bind_visibility_from(self.visibility, "work_card")
             with c:
