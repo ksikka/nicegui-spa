@@ -11,13 +11,16 @@ logging.basicConfig(level=logging.DEBUG)
 @ui.page('/{_:path}')  # all other pages will be handled by the router but must be registered to also show the SPA index page
 def main():
     tab_manager = TabManager()
-    tab_manager.add_tab("/", tab_one.TabOne("/two"))
-    tab_manager.add_tab("/two", tab_one.TabOne("/"))
+    tab_manager.add_tab("/", tab_one.TabOne("/models"))
+    tab_manager.add_tab("/datasets", tab_one.TabOne("/"))
+    tab_manager.add_tab("/models", tab_one.TabOne("/"))
 
     # adding some navigation buttons to switch between the different pages
-    with ui.row():
-        ui.button('One', on_click=lambda: tab_manager.switch_tab("/")).classes('w-32')
-        ui.button('Two', on_click=lambda: tab_manager.switch_tab("/two")).classes('w-32')
+    with ui.header():
+        ui.image("img/LightningPose_horizontal_light.webp")
+        ui.link("Datasets", "/datasets").classes("soft-link")
+        ui.link("Models", "/models").classes("soft-link")
+        ui.link('Sample', "/").classes('w-32 soft-link')
 
     # this places the content which should be displayed
     tab_manager.build()
