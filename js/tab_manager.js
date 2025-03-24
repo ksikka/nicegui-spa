@@ -11,6 +11,9 @@ export default {
     // to navigate to the  correct page.
     const connectInterval = setInterval(async () => {
       if (window.socket.id === undefined) return;
+      if (window.location.pathname === '/') {
+          history.replaceState(null, '', '/p/home')
+      }
       this.$emit("switch_tab", window.location.pathname);
       clearInterval(connectInterval);
     }, 10);
@@ -21,7 +24,7 @@ export default {
       if (targetLink) {
           event.preventDefault();
           const path = targetLink.pathname;
-          history.pushState({page: path}, "", path); // pushState here!
+          history.pushState({page: path}, "", path);
 
           try {
              this.$emit("switch_tab", window.location.pathname);
