@@ -1,4 +1,5 @@
 import asyncio
+import enum
 
 from nicegui import ui
 

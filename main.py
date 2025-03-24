@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
-import tab_one
-from tabmanager import TabManager
-import tabs
+import os
 
-from nicegui import ui
+# Override storage path before importing nicegui.
+os.environ["NICEGUI_STORAGE_PATH"] = os.path.expanduser("~/.lightning-pose")
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+from nicegui import ui
+
+import tab_one
+import tabs
+from tabmanager import TabManager
+
+
 
 
 # Root and all pages will return the "single-page-app".
@@ -18,21 +23,23 @@ logging.basicConfig(level=logging.DEBUG)
 def main():
     tab_manager = TabManager()
     tab_manager.add_tab("/p/home", tabs.home.Home())
+    tab_manager.add_tab("/p/models", tabs.models.Models())
 
     # adding some navigation buttons to switch between the different pages
     with ui.header():
         # ui.image("img/LightningPose_horizontal_light.webp")
         # replace= removes the default .nicegui-link which made the link blue and underlined.
         ui.link("Home", "/p/home").classes(replace="text-lg text-white soft-link")
+        ui.link("Models", "/p/models").classes(replace="text-lg text-white soft-link")
 
     # this places the content which should be displayed
     tab_manager.build()
 
-
-ui.run(
-    host="0.0.0.0",
-    uvicorn_logging_level=logging.DEBUG,
-    prod_js=False,
-    title="Lightning Pose",
-    favicon="img/favicon.ico",
-)
+if __name__ in {"__main__", "__mp_main__"}:
+    ui.run(
+        host="0.0.0.0",
+        #uvicorn_logging_level=logging.DEBUG,
+        prod_js=False,
+        title="Lightning Pose",
+        favicon="img/favicon.ico",
+    )
