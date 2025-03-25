@@ -24,6 +24,7 @@ def main():
     tab_manager = TabManager()
     tab_manager.add_tab("/p/home", tabs.home.Home())
     tab_manager.add_tab("/p/models", tabs.models.Models())
+    tab_manager.add_tab("/p/faketab", tab_one.TabOne("/p/models"))
 
     # adding some navigation buttons to switch between the different pages
     with ui.header():
@@ -31,6 +32,7 @@ def main():
         # replace= removes the default .nicegui-link which made the link blue and underlined.
         ui.link("Home", "/p/home").classes(replace="text-lg text-white soft-link")
         ui.link("Models", "/p/models").classes(replace="text-lg text-white soft-link")
+        ui.link("TestTab", "/p/faketab").classes(replace="text-lg text-white soft-link")
 
     # this places the content which should be displayed
     tab_manager.build()

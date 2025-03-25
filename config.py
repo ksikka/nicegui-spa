@@ -1,1 +1,1 @@
-model_dir = "/home/ksikka/outputs"
+model_dir = "/home/ksikka/synced/outputs"
